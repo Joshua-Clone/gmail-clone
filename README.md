@@ -67,3 +67,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 # gmail-clone
+
+
+type the following in terminal command line: " npm uninstall -g create-react-app && npm i -g npm@latest && npm cache clean -f && npx create-react-app (Application Name) --template redux(If you are using Redux, you should be using Redux)"
+
+source: https://stackoverflow.com/questions/64963796/create-react-app-is-not-working-since-version-4-0-1
