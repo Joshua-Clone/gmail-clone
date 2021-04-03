@@ -7,13 +7,12 @@ import { useDispatch } from "react-redux";
 import { closeSendMessage } from "./features/mailSlice"
 
 function SendMail () {
-    const { register, handleSubmit, watch, errors } = useForm(); 
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
-    const onSubmit = (formData) => {
-        
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const onSubmit = data => console.log(data);
+  
     return (
         <div className="sendMail">
             <div className="sendMail__header">
@@ -23,29 +22,29 @@ function SendMail () {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input 
-                    name="to" 
+                    htmlFor="to" 
                     placeholder="To:" 
                     type="email" 
-                    // ref={register({ required: true })}
+                    {...register("to", { required: true })}
                 />
-                {/* {errors.to && <p className="sendMail__error">To is Required</p>} */}
+                {errors.to && errors.to.type === "required" && <p className="sendMail__error">To is Required</p>}
 
                 <input 
-                    name="subject" 
+                    htmlFor="subject" 
                     placeholder="Subject" 
                     type="text"
-                    // ref={register({ required: true })}
+                    {...register("subject", { required: true })}
                 />
-                {/* {errors.subject && <p className="sendMail__error">Subject is Required</p>} */}
+                {errors.subject && errors.subject.type === "required" && <p className="sendMail__error">Subject is Required</p>}
 
                 <input 
-                    name="message"
+                    htmlFor="message"
                     placeholder="Message..." 
                     type="text"
                     className="sendMail__message"
-                    // ref={register({ required: true })}
+                    {...register("message", { required: true })}
                 />
-                {/* {errors.message && <p className="sendMail__error">Message is Required</p>} */}
+                {errors.message && errors.message.type === "required" && <p className="sendMail__error">Message is Required</p>}
 
                 <div className="sendMail__options">
                     <Button className="sendMail__send"
@@ -62,3 +61,5 @@ function SendMail () {
 export default SendMail; 
 
 // In terminal type "npm add react-hook-form"
+// Register error solution : https://stackoverflow.com/questions/66927729/ref-register-inside-input-is-giving-me-a-path-split-error/66927781#66927781
+// Form error solution : https://react-hook-form.com/advanced-usage
