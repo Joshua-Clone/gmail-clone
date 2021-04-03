@@ -13,19 +13,27 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PersonIcon from "@material-ui/icons/Person"
 import DuoIcon from "@material-ui/icons/Duo" 
 import PhoneIcon from "@material-ui/icons/Phone"
-
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { openSendMessage } from "./features/mailSlice";
+ 
 function Sidebar(){
+    const history = useHistory(); 
+
+    const dispatch = useDispatch(); 
+
     return (
         <div className="sidebar">
             <Button 
+                startIcon={<AddIcon fontSize="large"/>}
                 className="sidebar__compose" 
-                startIcon={<AddIcon fontSize="large"
-                />}
+                onClick={() => dispatch(openSendMessage())}
             >
                 Compose
             </Button>
-
-            <SidebarOption Icon={InboxIcon} title="Inbox" number={54} selected={true}/>
+            <div onClick={() => history.push("/")}>
+                <SidebarOption Icon={InboxIcon} title="Inbox" number={54} selected={true}/>
+            </div>
             <SidebarOption Icon={StarIcon} title="Starred" number={27} />
             <SidebarOption Icon={AccessTimeIcon} title="Snoozed" number={14} />
             <SidebarOption Icon={LabelImportantIcon} title="Important" number={7} />
